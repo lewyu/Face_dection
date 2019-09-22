@@ -7,10 +7,12 @@
 
 【Key words】 Face recognition, Face detection, Deep learning.
 
+1.近年来, 各种目标检测及识别技术在诸多应用场景得到普及，其主要原因在于计算机视觉不断取得新突破。其中作为热点之一，人脸检测及识别技术被广泛应用于安防、金融等行业。本文详细介绍了人脸识别的发展历史和国内外现状，最后在Python集成开发工具Pycharm上，采用深度学习框架TensorFlow，基于MTCNN/FaceNet/OpenCV环境，设计并实现了人脸识别及在线检测系统。其中人脸在线检测模块由MTCNN模型实现，再利用FaceNet模型对检测后的人脸进行对比和识别，实现人脸识别的功能。
 
 2.1 MTCNN模型
 MTCNN[10] (,Multi-task convolutional neural network)综合考虑了人脸区域检测和面部关键点检测，称为多任务级联神经网络模型。MTCNN模型的网络整体架构如下图2.1所示：
-![image](https://github.com/lewyu/Face_dection/blob/master/readme_img/1.jpg)
+ ![image](https://github.com/lewyu/Face_dection/blob/master/readme_img/1.jpg)
+ 
 图2.1 MTCNN 整体架构
 
 
