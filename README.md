@@ -10,25 +10,25 @@
 
 2.1 MTCNN模型
 MTCNN[10] (,Multi-task convolutional neural network)综合考虑了人脸区域检测和面部关键点检测，称为多任务级联神经网络模型。MTCNN模型的网络整体架构如下图2.1所示：
- 
+![image](https://github.com/lewyu/Face_dection/blob/master/readme_img/1.jpg)
 图2.1 MTCNN 整体架构
 
 
 首先，根据不同的缩放将照片缩放到不同的尺寸，以形成图像的特征金字塔。P-Net通过标记面部区域窗口并获取边界框坐标位置。在得到若干边界框后，然后通过非最大抑制（NMS）合并高度重叠的候选帧。R-Net将通过R-Net网络中的P-Net候选框进行训练，然后使用边界框的回归值来微调候选表格，然后使用NMS删除重叠表格。 O-Net功能类似于R-Net，除了在删除重叠候选窗口的同时显示五个面部关键点。
 P-Net（Proposal Network）的网络结构是一个完整的卷积神经网络结构和一个浅网络，因此对输入图片的大小没有要求，但是不同大小的图片会产生不同数量的输出。该网络结构目的是为了得到候选窗口和面部区域的边界框的回归向量。边界框用于回归，并且校准候选窗口。P-Net的模型结构如图2.2所示：
- 
+ ![image](https://github.com/lewyu/Face_dection/blob/master/readme_img/2.jpg)
 图2.2 P-Net
 R-Net(Refine Network)比P-Net多了最后一层全连接层，因此输入固定大小的图片，得到固定数量的输出，但这样一来会取得更好的抑制假积极的效果。这个网络的主要任务是将经过P-Net确定的包含候选框的图像在R-Net网络中继续训练，使用边界框向量微调候选框，然后使用非最大值抑制删除重叠边界以进一步细化面部候选框。R-Net 的模型结构如图2.3所示：
- 
+ ![image](https://github.com/lewyu/Face_dection/blob/master/readme_img/3.jpg)
 图2.3 R-Net
 
 O-Net（Output Network）是MTCNN中用作网络最终输出的最后一个网络。 该层比R-Net层又多一层卷积层，因此也对输入图片的大小有要求，同时得到固定数量的输出。其作用和R-Net层作用一样，但是该层对面部区域具有更多监督，并且还输出5个界标。处理结果也会进一步精细。O-Net 的模型结构如图2.4所示：
- 
+ ![image](https://github.com/lewyu/Face_dection/blob/master/readme_img/4.jpg)
 图2.4 O-Net
 
 2.2 FaceNet模型
 FaceNet是谷歌(Google)公司提出用于人脸识别、验证、聚类功能的模型。与传统用于分类的神经网络不同，为了使处理过程更高效，FaceNet模型选择了更直接的端到端学习及分类方法。这样一来只会生成更少的参数量，也就提高了处理效率。 执行流程如2.5所示：
- 
+ ![image](https://github.com/lewyu/Face_dection/blob/master/readme_img/5.jpg)
 图2.5 FaceNet执行流程图
 
 输入 Batch，有一个提取特征的深度神经网络，然后对网络提取到的特征值做L2-normalization，之后通过embedding编码生成128d的向量，优化三元组损失函数得到最优模型。embedding 的数学解释f(x)ϵR^d,d = 128,其中x 表示输入图像，存在恒等式
