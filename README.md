@@ -5,7 +5,7 @@
 
 MTCNN：https://github.com/ipazc/mtcnn
 
-FaceNethttps://github.com/davidsandberg/facenet
+FaceNet：https://github.com/davidsandberg/facenet
 
 TensorFlow：1.7 
 
